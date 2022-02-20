@@ -12,10 +12,15 @@
     background-color: rgba(0, 0, 0, 0.6);
     pointer-events: none;
     color: white;
+    z-index: 10000;
 }
 
 .file_over #upload_overlay {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.table thead th {
+    vertical-align: middle;
 }

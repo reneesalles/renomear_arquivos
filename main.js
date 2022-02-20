@@ -1,10 +1,39 @@
 // variáveis globais
 var files_list = [];
 
+$(document).ready(init);
+$(document).on("paste", pasteHandler);
+
 // entrada do programa (também pode ser usado para resetar a tela)
 function init() {
     files_list = [];
     updateTable();
+}
+
+function pasteHandler(ev) {
+    try {
+        ev.preventDefault();
+        let $target = $(ev.target);
+
+        if ($target.is(".form-control")) {
+            let paste = (ev.originalEvent.clipboardData || window.clipboardData).getData('text');
+            paste = paste.toUpperCase();
+
+            let rows = paste.split('\n');
+
+            let $tbody = $target.closest('tbody');
+            let $inputs = $tbody.find('.form-control');
+            let index = $inputs.index($target);
+
+            for (let i = index, r = 0; i < files_list.length && r < rows.length; i++, r++) {
+                // pegar o novo nome desejado para o arquivo
+                $(`.new_file_name:eq(${i}) input`).val(rows[r]);
+            }
+        }
+    }
+    catch (exception) {
+        console.error(exception);
+    }
 }
 
 // função auxiliar para incluir novo arquivo no files_list
@@ -25,6 +54,14 @@ function removeAllFilesFromList() {
     updateTable();
 }
 
+function clearInput(sender) {
+    $(sender).closest(".new_file_name").find(".form-control").val("");
+}
+
+function clearAllInputs() {
+    $(".new_file_name").find(".form-control").val("");
+}
+
 // função que atualiza a tabela contendo a lista de arquivos
 function updateTable() {
     // conferir se files_list possuir ao menos 1 arquivo
@@ -32,8 +69,7 @@ function updateTable() {
 
     // se hasFiles for true, remover classe "d-none"
     // se hasFiles for false, adicionar classe "d-none"
-    $("#removeAllBtn")[hasFiles ? 'removeClass' : 'addClass']("d-none");
-    $("#downloadAllBtn")[hasFiles ? 'removeClass' : 'addClass']("d-none");
+    $("#removeAllBtn, #clearAllInputsBtn, #downloadAllBtn")[hasFiles ? 'removeClass' : 'addClass']("d-none");
 
     // criar um acesso à table
     let $files_list = $("#files_list");
@@ -63,7 +99,12 @@ function updateTable() {
                     <span>${filename}</span>
                 </td>
                 <td class="new_file_name">
-                    <input class="form-control form-control-sm" type="text" />
+                    <div class="input-group input-group-sm">
+                        <input class="form-control" type="text" />
+                        <div class="input-group-append">
+                            <button class="btn btn-warning" type="button" onclick="clearInput(this);">Limpar</button>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     <button class="btn btn-sm btn-danger btn-block" type="button" onclick="removeFileFromList(${i});">Remover</button>

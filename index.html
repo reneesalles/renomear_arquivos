@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="main.css" />
-    
+
     <title>Renomear Arquivos</title>
 </head>
 
@@ -19,29 +18,34 @@
     <div class="container">
         <div class="row">
             <div class="col col-md-10 col-lg-8 mx-auto">
-                <div id="drop_zone" class="p-1 border" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"
-                    ondragleave="dragLeaveHandler(event);">
-                    <div>
-                        <label for="upload_input" class="btn btn-secondary">Clique aqui</label> ou Arraste seus arquivos
-                        aqui
-                        <input id="upload_input" class="form-control-file d-none" type="file" onchange="uploadFiles(event);" multiple />
+                <div id="drop_zone" class="p-1 border" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);">
+                    <div class="row m-0 py-1 sticky-top bg-white">
+                        <div>
+                            <label for="upload_input" class="btn btn-secondary m-0">Clique aqui</label> ou Arraste seus arquivos aqui
+                            <input id="upload_input" class="form-control-file d-none" type="file" onchange="uploadFiles(event);" multiple />
+                        </div>
+                        <button id="downloadAllBtn" class="btn btn-success d-none ml-auto" type="button" onclick="downloadAll();">Baixar Arquivos</button>
                     </div>
                     <table id="files_list" class="table table-bordered table-light m-0">
                         <thead class="thead-light">
                             <tr>
-                                <th>Extensão</th>
-                                <th>Origem</th>
-                                <th>Destino</th>
                                 <th>
-                                    <button id="removeAllBtn" class="btn btn-sm btn-danger btn-block d-none" type="button" onclick="removeAllFilesFromList();">Limpar</button>
+                                    Extensão
+                                </th>
+                                <th>
+                                    Origem
+                                </th>
+                                <th>
+                                    Destino
+                                    <button id="clearAllInputsBtn" class="btn btn-sm btn-warning d-none" type="button" onclick="clearAllInputs()">Limpar Tudo</button>
+                                </th>
+                                <th>
+                                    <button id="removeAllBtn" class="btn btn-sm btn-danger btn-block d-none" type="button" onclick="removeAllFilesFromList();">Remover Tudo</button>
                                 </th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
-                    <div class="d-flex pt-1">
-                        <button id="downloadAllBtn" class="btn btn-sm btn-success mx-auto d-none" type="button" onclick="downloadAll();">Baixar Arquivos</button>
-                    </div>
                     <div id="upload_overlay">
                         <span>Solte para adicionar</span>
                     </div>
@@ -51,13 +55,9 @@
     </div>
 
     <!-- Jquery -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
     <script src="main.js"></script>
 </body>
