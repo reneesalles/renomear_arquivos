@@ -1,3 +1,7 @@
+body {
+    background-image: url("./images/coragem sorrindo.jpeg");
+}
+
 #drop_zone {
     position: relative;
 }
