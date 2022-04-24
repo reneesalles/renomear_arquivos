@@ -1,6 +1,7 @@
 body {
     background-image: url("./Images/coragem sorrindo.jpeg");
-}
+background-repeat: no-repeat;background-size: cover;background-position-y: 10%;}
+
 
 #drop_zone {
     position: relative;
